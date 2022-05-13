@@ -63,6 +63,8 @@ extern int pos;
 %token L_SQUARE_BRACKET
 %token R_SQUARE_BRACKET
 %token ASSIGN
+%token <int_val> NUM 
+%token <oper_val> IDENT
 
 %%
 
