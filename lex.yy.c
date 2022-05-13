@@ -2148,22 +2148,4 @@ void yyfree (void * ptr )
 #line 92 "miniL.lex"
 
 
-	/* C functions used in lexer */
-
-int main(int argc, char ** argv)
-{
-   if(argc >= 2)
-   {
-   	yyin = fopen(argv[1], "r");
-	if(yyin == NULL)
-	{
-		yyin = stdin;
-	}
-   	else
-   	{
-		yyin = stdin;
-   	}
-   }
-   yylex();
-}
 
