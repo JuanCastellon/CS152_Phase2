@@ -15,7 +15,7 @@ Comp -> EQ | NEQ | LT | GT | LTE | GTE
 Bool_Expr -> Relation_And_Expr | Relation_And_Expr Or Bool_Expr
 Relation_And_Expr -> Relation_Expr | Relation_Expr And Relation_And_Expr
 Relation_Expr -> Expression Comp Expression | Not Expression Comp Expression | True | Not True | False | Not False | L_Parenthesis Bool_Expr R_Parenthesis | Not L_Parenthesis Bool_Expr R_Parenthesis
-Term -> Var | Sub Var | Number | Sub Number | L_Parenthesis Expression R_Parenthesis | Sub L_Parenthesis Expression R_Parenthesis | Identifier L_Parenthesis Expressions
+Term -> Var | Sub Var | Number | Sub Number | L_Parenthesis Expression R_Parenthesis | Sub L_Parenthesis Expression R_Parenthesis | Identifier L_Parenthesis Expressions R_Parenthesis
 Statement -> Var Assign Expression | If Bool_Expr Then Statements Endif | If Bool_Expr Then Statements Else Statements Endif | While Bool_Expr Begin_Loop Statements End_Loop | Do Begin_Loop Statements End_Loop While Bool_Exp | Read Vars | Continue | Return Expression
 Statements -> Statement Semicolon Epsilon | Statement Semicolon Statements 
 Var -> Identifier | Identifier L_Square_Bracket Expression R_Square_Bracket

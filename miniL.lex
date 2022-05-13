@@ -1,11 +1,12 @@
    /* cs152-miniL phase1 */
-   
+%option noyywrap   
 %{   
 
+#include "y.tab.h"
    /* write your C code here for definitions of variables and including headers */
    int currLine = 1;
    int currPos = 1;
-   extern int num;
+   extern int number;
    extern char* ident;
 
 %}
