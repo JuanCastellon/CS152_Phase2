@@ -5,10 +5,8 @@
    /* write your C code here for definitions of variables and including headers */
    int currLine = 1;
    int currPos = 1;
-   int numInt = 0;
-   int numOp = 0;
-   int numPar = 0;
-   int numEq = 0;
+   int num;
+   char* ident;
 
 %}
 
@@ -24,65 +22,65 @@ COMMENT  ##(.)*
    /* specific lexer rules in regex */
    /* Reserved Word*/
 
-"function"		{printf("FUNCTION\n"); currPos += yyleng;}
-"beginparams"		{printf("BEGIN_PARAMS\n"); currPos += yyleng;}
-"endparams"  		{printf("END_PARAMS\n"); currPos += yyleng;}
-"beginlocals"		{printf("BEGIN_LOCALS\n"); currPos += yyleng;}
-"endlocals"		{printf("END_LOCALS\n"); currPos += yyleng;}
-"beginbody"		{printf("BEGIN_BODY\n"); currPos += yyleng;}
-"endbody"		{printf("END_BODY\n"); currPos += yyleng;}
-"integer"		{printf("INTEGER\n"); currPos += yyleng; numInt++;}
-"array"			{printf("ARRAY\n"); currPos += yyleng;}
-"enum"			{printf("ENUM\n"); currPos += yyleng;}
-"of"			{printf("OF\n"); currPos += yyleng;}
-"if"			{printf("IF\n"); currPos += yyleng;}
-"then"			{printf("THEN\n"); currPos += yyleng;}
-"endif"			{printf("ENDIF\n"); currPos += yyleng;}
-"else"			{printf("ELSE\n"); currPos += yyleng;}
-"for"			{printf("FOR\n"); currPos += yyleng;}
-"while"			{printf("WHILE\n"); currPos += yyleng;}
-"do"			{printf("DO\n"); currPos += yyleng;}
-"beginloop"		{printf("BEGINLOOP\n"); currPos += yyleng;}
-"endloop"		{printf("ENDLOOP\n"); currPos += yyleng;}
-"continue"		{printf("CONTINUE\n"); currPos += yyleng;}
-"read"			{printf("READ\n"); currPos += yyleng;}
-"write"			{printf("WRITE\n"); currPos += yyleng;}
-"and"			{printf("AND\n"); currPos += yyleng;}
-"or"			{printf("OR\n"); currPos += yyleng;}
-"not"			{printf("NOT\n"); currPos += yyleng;}
-"true"			{printf("TRUE\n"); currPos += yyleng;}
-"false"			{printf("FALSE\n"); currPos += yyleng;}
-"return"		{printf("RETURN\n"); currPos += yyleng;}
+"function"		{currPos += yyleng; return FUNCTION;}
+"beginparams"		{currPos += yyleng; return BEGIN_PARAMS;}
+"endparams"  		{currPos += yyleng; return END_PARAMS;}
+"beginlocals"		{currPos += yyleng; return BEGIN_LOCALS;}
+"endlocals"		{currPos += yyleng; return END_LOCALS;}
+"beginbody"		{currPos += yyleng; return BEGIN_BODY;}
+"endbody"		{currPos += yyleng; return END_BODY;}
+"integer"		{currPos += yyleng; return INTEGER;}
+"array"			{currPos += yyleng; return ARRAY;}
+"enum"			{currPos += yyleng; return ENUM;}
+"of"			{currPos += yyleng; return OF;}
+"if"			{currPos += yyleng; return IF;}
+"then"			{currPos += yyleng; return THEN;}
+"endif"			{currPos += yyleng; return ENDIF;}
+"else"			{currPos += yyleng; return ELSE;}
+"for"			{currPos += yyleng; return FOR;}
+"while"			{currPos += yyleng; return WHILE;}
+"do"			{currPos += yyleng; return DO;}
+"beginloop"		{currPos += yyleng; return BEGIN_LOOP;}
+"endloop"		{currPos += yyleng; return END_LOOP;}
+"continue"		{currPos += yyleng; return CONTINUE;}
+"read"			{currPos += yyleng; return READ;}
+"write"			{currPos += yyleng; return WRITE;}
+"and"			{currPos += yyleng; return AND;}
+"or"			{currPos += yyleng; return OR;}
+"not"			{currPos += yyleng; return NOT;}
+"true"			{currPos += yyleng; return TRUE;}
+"false"			{currPos += yyleng; return FALSE;}
+"return"		{currPos += yyleng; return RETURN;}
 
    /* Arithmetic Operators*/
-   "-"			{printf("SUB\n"); currPos += yyleng; numOp++;}
-   "+"			{printf("ADD\n"); currPos += yyleng; numOp++;}
-   "*"			{printf("MULT\n"); currPos += yyleng; numOp++;}
-   "/"			{printf("DIV\n"); currPos += yyleng; numOp++;}
-   "%"			{printf("MOD\n"); currPos += yyleng; numOp++;}
+   "-"			{currPos += yyleng; return SUB;}
+   "+"			{currPos += yyleng; return ADD;}
+   "*"			{currPos += yyleng; return MULT;}
+   "/"			{currPos += yyleng; return DIV;}
+   "%"			{currPos += yyleng; return MOD;}
 
    /* Comparison Operators*/
-   "=="			{printf("EQ\n"); currPos += yyleng; numEq++;}
-   "<>"			{printf("NEQ\n"); currPos += yyleng;}
-   "<"			{printf("LT\n"); currPos += yyleng;}
-   ">"			{printf("GT\n"); currPos += yyleng;}
-   "<="			{printf("LTE\n"); currPos += yyleng;}
-   ">="			{printf("GTE\n"); currPos += yyleng;}
+   "=="			{currPos += yyleng; return EQ;}
+   "<>"			{currPos += yyleng; return NEQ;}
+   "<"			{currPos += yyleng; return LT;}
+   ">"			{currPos += yyleng; return GT;}
+   "<="			{currPos += yyleng; return LTE;}
+   ">="			{currPos += yyleng; return GTE;}
 
    /*Other Special Symbols*/
-   ";"			{printf("SEMICOLON\n"); currPos += yyleng;}
-   ":"			{printf("COLON\n"); currPos += yyleng;}
-   ","			{printf("COMMA\n"); currPos += yyleng;}
-   "("			{printf("L_PAREN\n"); currPos += yyleng; numPar++;}
-   ")"			{printf("R_PAREN\n"); currPos += yyleng; numPar++;}
-   "["			{printf("L_SQUARE_BRACKET\n"); currPos += yyleng;}
-   "]"			{printf("R_SQUARE_BRACKET\n"); currPos += yyleng;}
-   ":="			{printf("ASSIGN\n"); currPos += yyleng;} 
+   ";"			{currPos += yyleng; return SEMICOLON;}
+   ":"			{currPos += yyleng; return COLON;}
+   ","			{currPos += yyleng; return COMMA;}
+   "("			{currPos += yyleng; return L_PAREN;}
+   ")"			{currPos += yyleng; return R_PAREN;}
+   "["			{currPos += yyleng; return L_SQUARE_BRACKET;}
+   "]"			{currPos += yyleng; return R_SQUARE_BRACKET;}
+   ":="			{currPos += yyleng; return ASSIGN;} 
 
    /*Identifiers and Numbers*/
-   {DIGIT}+             {printf("NUMBER %s\n", yytext); currPos += yyleng;}
+   {DIGIT}+             {currPos += yyleng; number = atoi(yytext); return NUMBER;}
    {INVALID1}           {printf("ERROR at line %d: identifier %s cannot start with an underscore\n", currLine, yytext); exit(0);}
-   {IDENT}              {printf("IDENT %s\n", yytext); currPos += yyleng;}
+   {IDENT}              {currPos += yyleng; ident = yytext; return IDENT;}
    " "			{/*Ignore White Space*/ currPos += yyleng;}
    [\t]                 {/*Ignore White Space*/ currPos += yyleng;}
    {COMMENT}            {/*Ignore Comments   */ currLine++; currPos = 1;}
@@ -108,8 +106,4 @@ int main(int argc, char ** argv)
    	}
    }
    yylex();
-   printf("# of Integers    : %d\n", numInt);
-   printf("# of Operators   : %d\n", numOp);
-   printf("# of Parentheses : %d\n", numPar);
-   printf("# of Equal Signs : %d\n", numEq);
 }
