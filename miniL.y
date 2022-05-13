@@ -71,7 +71,11 @@ extern int pos;
 prog_start:
 	functions
 		{printf("prog_start -> functions\n");};
+    
+functions:     FUNCTION IDENT SEMICOLON BEGIN_PARAMS declarations END_PARAMS BEGIN_LOCALS declarations END_LOCALS
+                {printf("functions->FUNCTION IDENT SEMICOLON BEGIN_PARAMS declarations END_PARAMS BEGIN_LOCALS declarations END_LOCALS\n");};
 
+declarations:   
 %%
 
 int main(int argc, char **argv) {
