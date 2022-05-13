@@ -5,8 +5,8 @@
    /* write your C code here for definitions of variables and including headers */
    int currLine = 1;
    int currPos = 1;
-   int num;
-   char* ident;
+   extern int num;
+   extern char* ident;
 
 %}
 
