@@ -5,6 +5,14 @@
 
 %{
 void yyerror(const char *msg);
+extern int currLine;
+extern int pos;
+%}
+
+//Bison
+%union{ 
+    char * oper_val
+    int * int_val
 %}
 
 %error-verbose
@@ -71,4 +79,5 @@ int main(int argc, char **argv) {
 
 void yyerror(const char *msg) {
     /* implement your error handling */
+    printf("Error at line %d: %s \n", currLine, pos, msg, )
 }
