@@ -1,6 +1,6 @@
 /* cs152-miniL phase2 */
 %{
-#include "heading.h"
+#include <stdio.h>
 %}
 
 %{
