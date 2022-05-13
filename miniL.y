@@ -6,7 +6,7 @@ char* ident;
 int number;
 
 extern int currLine;
-extern int pos;
+extern int currPos;
 FILE * yyin;
 %}
 
@@ -88,11 +88,11 @@ identifiers:
 		{printf("identifier -> ident COMMA identifiers\n", ident);};
 
 declaration:
-	identifier COLON INTEGER
+	identifiers COLON INTEGER
 		{printf("declaration -> identifier COLON INTEGER\n");}
 	| identifiers COLON ARRAY L_SQUARE_BRACKET NUMBER R_SQUARE_BRACKET OF INTEGER
 		{printf("declaration -> identifiers COLON ARRAY L_SQUARE_BRACKET NUMBER R_SQUARE_BRACKET OF INTEGER\n");}
-	| ENUM L_PAREN identifiers R_PAREN
+	| identifiers COLON ENUM L_PAREN identifiers R_PAREN
 		{printf("declaration -> ENUM L_PAREN identifiers R_PAREN\n");};
 
 declarations:
@@ -203,6 +203,8 @@ statement:
 		{printf("statement -> DO BEGIN_LOOP statements END_LOOP WHILE bool_expr\n");}
 	| READ vars
 		{printf("statement -> READ vars\n");}
+	| WRITE vars
+		{printf("statement -> WRITE vars\n");}
 	| CONTINUE
 		{printf("statement -> CONTINUE\n");}
 	| RETURN expression
@@ -232,7 +234,7 @@ int main(int argc, char **argv){
     if (argc > 1) {
         yyin = fopen(argv[1], "r");
         if (yyin == NULL) {
-            printf("error: %s file error", argv[0])
+            printf("error: %s file error", argv[0]);
         }
     }
    yyparse();
@@ -241,5 +243,5 @@ int main(int argc, char **argv){
 
 void yyerror(const char *msg) {
     /* implement your error handling */
-    printf("Error at line %d: %s \n", currLine, pos, msg, )
+    printf("Error at line %d: %s \n", currLine, currPos, msg);
 }
