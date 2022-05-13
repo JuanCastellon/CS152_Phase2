@@ -7,6 +7,7 @@
 void yyerror(const char *msg);
 extern int currLine;
 extern int pos;
+FILE * yyin;
 %}
 
 //Bison
@@ -79,6 +80,12 @@ declarations:
 %%
 
 int main(int argc, char **argv) {
+    if (argc > 1) {
+        yyin = fopen(argv[1], "r");
+        if (yyin == NULL) {
+            printf("error: %s file error", argv[0])
+        }
+    }
    yyparse();
    return 0;
 }
