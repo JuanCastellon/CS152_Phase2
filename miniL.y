@@ -1,4 +1,8 @@
-    /* cs152-miniL phase2 */
+/* cs152-miniL phase2 */
+%{
+#include "heading.h"
+%}
+
 %{
 void yyerror(const char *msg);
 %}
