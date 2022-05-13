@@ -1,11 +1,12 @@
    /* cs152-miniL phase1 */
-   
+%option noyywrap   
 %{   
 
+#include "y.tab.h"
    /* write your C code here for definitions of variables and including headers */
    int currLine = 1;
    int currPos = 1;
-   extern int num;
+   extern int number;
    extern char* ident;
 
 %}
@@ -89,21 +90,3 @@ COMMENT  ##(.)*
    .			{printf("ERROR at line %d, column %d: unrecognized symbol \"%s\"\n", currLine, currPos, yytext); exit(0);}
 
 %%
-	/* C functions used in lexer */
-
-int main(int argc, char ** argv)
-{
-   if(argc >= 2)
-   {
-   	yyin = fopen(argv[1], "r");
-	if(yyin == NULL)
-	{
-		yyin = stdin;
-	}
-   	else
-   	{
-		yyin = stdin;
-   	}
-   }
-   yylex();
-}
