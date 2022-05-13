@@ -4,6 +4,9 @@
 void yyerror(const char *msg);
 char* ident;
 int number;
+
+extern int currLine;
+extern int pos;
 FILE * yyin;
 %}
 
@@ -238,4 +241,5 @@ int main(int argc, char **argv){
 
 void yyerror(const char *msg) {
     /* implement your error handling */
+    printf("Error at line %d: %s \n", currLine, pos, msg, )
 }
