@@ -1,0 +1,22 @@
+Function -> Function Ident Semicolon 
+            Begin_Params Declarations End_Params 
+            Begin_Locals Declarations End_Locals
+            Begin_Body Statements End_Body
+Functions -> Epsilon | Function Functions
+Identifier -> Identifier
+Identifiers -> Identifier | Identifier COMMA Identifiers
+Declaration -> Identifiers Colon Integer | Identifiers Colon Array L_Square_Bracket Number R_Square_Bracket Of Integer | Enum L_Parenthesis Identifiers R_Parenthesis
+Declarations -> Epsilon | Declaration Semicolon Declarations
+Multiplicative-Expr -> Term | Term Mult Multiplicative_Expr | Term Div Multiplicative_Expr | Term Mod Multiplicative_Expr
+Expression -> Multiplicative_Expr | Multiplicative_Expr Add Expression | Multiplicative_Expr Sub Expression
+Expressions -> Epsilon | Multiple_Expr
+Multiple_Expr -> Expression | Expression COMMA Multiple_Expr
+Comp -> EQ | NEQ | LT | GT | LTE | GTE
+Bool_Expr -> Relation_And_Expr | Relation_And_Expr Or Bool_Expr
+Relation_And_Expr -> Relation_Expr | Relation_Expr And Relation_And_Expr
+Relation_Expr -> Expression Comp Expression | Not Expression Comp Expression | True | Not True | False | Not False | L_Parenthesis Bool_Expr R_Parenthesis | Not L_Parenthesis Bool_Expr R_Parenthesis
+Term -> Var | Sub Var | Number | Sub Number | L_Parenthesis Expression R_Parenthesis | Sub L_Parenthesis Expression R_Parenthesis | Identifier L_Parenthesis Expressions
+Statement -> Var Assign Expression | If Bool_Expr Then Statements Endif | If Bool_Expr Then Statements Else Statements Endif | While Bool_Expr Begin_Loop Statements End_Loop | Do Begin_Loop Statements End_Loop While Bool_Exp | Read Vars | Continue | Return Expression
+Statements -> Statement Semicolon Epsilon | Statement Semicolon Statements 
+Var -> Identifier | Identifier L_Square_Bracket Expression R_Square_Bracket
+Vars -> Var | Var COMMA Vars 
